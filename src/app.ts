@@ -1,6 +1,7 @@
 import express from 'express';
 import ProductController from './controllers/productController';
 import UserController from './controllers/userController';
+import OrderController from './controllers/orderController';
 import validationProducts from './middlewares/validationProducts';
 import validationUsers from './middlewares/validationUsers';
 
@@ -25,4 +26,7 @@ app.post(
   validationUsers.validationPassword,
   userController.create,
 );
+
+const orderController = new OrderController();
+app.get('/orders', orderController.getAll);
 export default app;
