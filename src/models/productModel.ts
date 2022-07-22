@@ -31,10 +31,10 @@ export default class ProductModel {
     };
     return productCreated;
   }
-
-  public async getId(id: number): Promise<Products[]> {
-    const [query] = await this.connection.execute(`
-    SELECT * FROM TrybeSmith.products WHERE orderId = ?`, [id]);
-    return query as Products[];
-  }
+  // não precisei usar
+  // public async getId(id: number): Promise<Products[]> {
+  //   const [query] = await this.connection.execute(`
+  //   SELECT * FROM TrybeSmith.products WHERE orderId = ?`, [id]);
+  //   return query as Products[];
+  // }
 }
