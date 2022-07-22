@@ -29,4 +29,11 @@ app.post(
 
 const orderController = new OrderController();
 app.get('/orders', orderController.getAll);
+
+app.post(
+  '/login',
+  validationUsers.validationUserName,
+  validationUsers.validationPassword,
+  userController.login,
+);
 export default app;

@@ -7,7 +7,7 @@ const jwtConfig = { // HEADER
   algorithm: 'HS256',
 };
 // PAYLOAD DO BANCO DE DADOS, VEM COMO PARÂMETRO DE UMA FUNÇÃO
-const generateJWT = (payload: { id: number, username: string, classe: string, level: number }) => {
+const generateJWT = (payload: { id: number, username: string }) => {
   const token = jwt.sign({ data: payload }, secretKey, jwtConfig as SignOptions);
   return token;
 };

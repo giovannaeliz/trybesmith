@@ -5,7 +5,7 @@ export interface Products {
   orderId?: number
 }
 export interface Users {
-  id?: number,
+  id: number,
   username: string,
   classe: string,
   level: number,
@@ -15,4 +15,8 @@ export interface Orders {
   id: number,
   userId: number,
   productsIds: number[]
+}
+export interface Login {
+  username: string,
+  password: string
 }

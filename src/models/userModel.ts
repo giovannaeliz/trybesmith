@@ -16,7 +16,13 @@ export default class UserModel {
       [username, classe, level, password],
     );
     const { insertId } = result;
-    const token = generateJWT({ id: insertId, username, classe, level });
+    const token = generateJWT({ id: insertId, username });
     return token;
+  }
+
+  public async getAll(): Promise<Users[]> {
+    const query = 'SELECT * FROM Trybesmith.Users';
+    const [users] = await this.connection.execute(query);
+    return users as Users[];
   }
 }
