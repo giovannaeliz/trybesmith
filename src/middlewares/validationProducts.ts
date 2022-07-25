@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 
 const validationName = (req: Request, res: Response, next: NextFunction) => {
   const { name } = req.body;
-  console.log(name);
+  // console.log(name);
   if (!name) {
     return res.status(400).json({ message: '"name" is required' });
   } if (typeof name !== 'string') {

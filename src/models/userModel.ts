@@ -25,4 +25,17 @@ export default class UserModel {
     const [users] = await this.connection.execute(query);
     return users as Users[];
   }
+
+  public async getById(id: number, username: string) {
+    const result = await this.connection.execute(
+      `SELECT id, username FROM Trybesmith.Users
+      WHERE id=? AND username=?;`,
+      [id, username],
+    );
+    // console.log('aqui');
+    const [insert] = result;
+    const json = JSON.stringify(insert);
+    const array = JSON.parse(json);
+    return array;
+  }
 }

@@ -4,6 +4,8 @@ import UserController from './controllers/userController';
 import OrderController from './controllers/orderController';
 import validationProducts from './middlewares/validationProducts';
 import validationUsers from './middlewares/validationUsers';
+import validationToken from './middlewares/validationToken';
+import error from './middlewares/error';
 
 const app = express();
 const productController = new ProductController();
@@ -36,4 +38,11 @@ app.post(
   validationUsers.validationPassword,
   userController.login,
 );
+app.post(
+  '/orders',
+  validationToken.validationToken,
+  validationToken.validationProductsIds, 
+  orderController.create,
+);
+app.use(error);
 export default app;

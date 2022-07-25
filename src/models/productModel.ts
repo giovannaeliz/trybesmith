@@ -31,10 +31,21 @@ export default class ProductModel {
     };
     return productCreated;
   }
+
   // não precisei usar
   // public async getId(id: number): Promise<Products[]> {
   //   const [query] = await this.connection.execute(`
   //   SELECT * FROM TrybeSmith.products WHERE orderId = ?`, [id]);
   //   return query as Products[];
   // }
+  public async update(orderId: number, id: number): Promise<number> {
+    const resultado = await this.connection.execute<ResultSetHeader>(
+      'UPDATE Trybesmith.Products SET orderId=? WHERE Id=?',
+      [orderId, id],
+    );
+    console.log(resultado);
+    const [updated] = resultado;
+    const { insertId } = updated;
+    return insertId;
+  }
 }

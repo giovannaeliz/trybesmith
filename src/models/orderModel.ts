@@ -1,4 +1,4 @@
-import { Pool } from 'mysql2/promise';
+import { Pool, ResultSetHeader } from 'mysql2/promise';
 import { Orders } from '../interfaces';
 import ProductModel from './productModel';
 
@@ -26,5 +26,23 @@ export default class OrderModel {
       });
       // quase choro com essa lógica
     return getOrders as unknown as Orders[];
+  }
+
+  public async createOrder(userId: number, productsIds:number[]) {
+    const result = await this.connection.execute<ResultSetHeader>(
+      'INSERT INTO Trybesmith.Orders (userId) VALUES (?);',
+      [userId],
+    );
+    console.log(result);
+    
+    const [dataInsertId] = result;
+    const { insertId } = dataInsertId;
+    // const promises = productsIds.map(async (up) => {
+    //   await this.product.update(up, insertId);
+    // });
+    await Promise.all(productsIds.map(async (up) => {
+      await this.product.update(insertId, up);
+    }));
+    return { userId, productsIds };
   }
 }
